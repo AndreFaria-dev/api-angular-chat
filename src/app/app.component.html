@@ -1,0 +1,49 @@
+<main class="content">
+  <div class="container p-0">
+
+  <h1 class="h3 mb-3">Caixa de entrada</h1>
+
+  <div class="card">
+    <div class="row g-0">
+      <div class="col-12 col-lg-5 col-xl-3 border-right">
+
+        <div class="px-4 d-none d-md-block">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+              <input type="text" class="form-control my-3" placeholder="Buscar cliente...">
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Lista de cliente -->
+
+
+        <app-cliente></app-cliente>
+
+
+
+
+
+        <!-- Lista de cliente -->
+
+        <hr class="d-block d-lg-none mt-1 mb-0">
+      </div>
+      <div class="col-12 col-lg-7 col-xl-9">
+
+
+        <!-- Mensagem component -->
+        <router-outlet></router-outlet>
+
+        <div class="flex-grow-0 py-3 px-4 border-top">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Escreva sua mensagem">
+            <button class="btn btn-primary" >Enviar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</main>

@@ -1,0 +1,18 @@
+<!-- Retornar lista da API -->
+
+<!-- Renderizar aviso de lista vazia, caso a condição seja verdadeira -->
+<div >
+    <!-- href="cliente/{{contato.id}}/inbox" -->
+    <a href="" [routerLink]="['/cliente', contato.id, 'inbox']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action border-0" *ngFor="let contato of cliente">
+        
+            <div class="d-flex align-items-start">
+                <img src="{{contato.foto}}" class="rounded-circle mr-1" alt="{{contato.nome}}" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                    {{contato.nome}}
+                    <div class="small"><span class="fas fa-circle chat-offline">{{contato.app}}</span> </div>
+                </div>
+            </div>
+        
+    </a>
+
+</div>
