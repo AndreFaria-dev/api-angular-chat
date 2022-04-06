@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { Cliente } from './cliente';
 
 @Component({
   selector: 'app-cliente',
@@ -8,22 +10,28 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class ClienteComponent implements OnInit {
 
-  cliente : Array<any> = new Array();
-
+  cliente : Cliente[];
+  cliente$ : Observable<Cliente[]>;
+  contatos : any;
+  
+  
   constructor(private clienteService : ClienteService) { }
 
   ngOnInit(): void {
     this.listarClientes();
+
+/*     this.contatos = setInterval(() =>{
+      this.listarClientes()
+    }, 3000); */
   }
+
+
+
 
   listarClientes(){
     console.log('Retornar lista de clientes');
-    this.clienteService.buscarClientes().subscribe(ctt =>{
-
-      console.log(ctt);
-      
-      this.cliente = ctt;
-      
-    });
+/*     this.clienteService.buscarClientes().subscribe(ctt =>this.cliente = ctt);
+ */
+    this.cliente$ = this.clienteService.buscarClientes();
   }
 }

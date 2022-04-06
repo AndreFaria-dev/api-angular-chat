@@ -3,7 +3,7 @@
 <!-- Renderizar aviso de lista vazia, caso a condição seja verdadeira -->
 <div >
     <!-- href="cliente/{{contato.id}}/inbox" -->
-    <a href="" [routerLink]="['/cliente', contato.id, 'inbox']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action border-0" *ngFor="let contato of cliente">
+    <a href="" [routerLink]="['/cliente', contato.id, 'inbox']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action border-0" *ngFor="let contato of cliente$ | async">
         
             <div class="d-flex align-items-start">
                 <img src="{{contato.foto}}" class="rounded-circle mr-1" alt="{{contato.nome}}" width="40" height="40">

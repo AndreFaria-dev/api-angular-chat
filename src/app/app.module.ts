@@ -9,7 +9,11 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 import { LoginComponent } from './components/login/login.component';
 import { ClienteService } from './services/cliente.service';
 import { DefaultComponent } from './components/default/default.component';
+// ... other imports
+import { FormsModule } from '@angular/forms';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+const config: SocketIoConfig = { url: 'https://mensseger.eox.com.br/messenger/clientes', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +25,8 @@ import { DefaultComponent } from './components/default/default.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [MensagemService, ClienteService],
   bootstrap: [AppComponent]
