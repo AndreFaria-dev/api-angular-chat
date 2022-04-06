@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MensagemService } from 'src/app/services/mensagem.service';
 
 @Component({
@@ -11,13 +11,18 @@ import { MensagemService } from 'src/app/services/mensagem.service';
 export class MensagemComponent implements OnInit {
 
   idCliente : String;
+  idAtendente : String;
   inscricao : Subscription;
   mensagens : Array<any> = new Array();
+  //mensagem : Mensagem[];
+  mensagem$ : Observable <any>;
+
+  msgs : any;
 
   //Instanciando objeto globalmente
   constructor(private mensagensService : MensagemService, private route : ActivatedRoute) {
     this.idCliente = this.route.snapshot.params['id'];
-    //console.log("ROTA ID DO CLIENTE",this.idCliente);
+    console.log("ROTA ID DO CLIENTE",this.idCliente, this.route.snapshot.params);
     
   }
 
@@ -28,8 +33,16 @@ export class MensagemComponent implements OnInit {
     this.inscricao = this.route.params.subscribe(
       (params : any) => {
         this.idCliente = params['id'];
-        console.log("CLIENTE SELECIONADO",this.idCliente);
-        this.listarMensagens(this.idCliente);
+        this.idAtendente = params['atendente_id'];
+        console.log("CLIENTE SELECIONADO",this.idCliente, this.idAtendente);
+
+        this.msgs = setInterval(()=>{
+          this.listarMensagens(this.idCliente, this.idAtendente);
+        }, 1000);
+
+        
+
+        
       }
     );
   }
@@ -38,23 +51,27 @@ export class MensagemComponent implements OnInit {
     this.inscricao.unsubscribe();
   }
 
-  listarMensagens(cliente: String){
+  listarMensagens(cliente: String, atendente : String){
     console.log('Executando o método listarMensagens', this.mensagensService);
 
     cliente = this.idCliente;
 
-    
+    atendente = this.idAtendente;
 
+    this.mensagensService.buscarCaixaEntrada(cliente,atendente).subscribe(msgs => {
 
-    this.mensagensService.listarMensagens(cliente).subscribe(msgs => {
-
-      msgs.tempo_envio = new Date(msgs.tempo_envio);
+      
   
 
       console.log("RESULTADO",msgs);
 
+      
+      
+
       /* Definindo o nome da variável para a diretiva no html */
       this.mensagens = msgs;
+
+      console.log('TIMESTAMP', msgs.tempo_envio);
     });
   }
 

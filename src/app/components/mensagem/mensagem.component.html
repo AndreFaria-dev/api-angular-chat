@@ -1,14 +1,4 @@
-<!-- <div class="py-2 px-4 border-bottom d-none d-lg-block">
-  <div class="d-flex align-items-center py-1">
-    <div class="position-relative">
-      <img src="{{m.foto}}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-    </div>
-    <div class="flex-grow-1 pl-3">
-      <strong>{{mensagens.nome[0]}}</strong>
-    </div>
 
-  </div>
-</div> -->
 
 <div class="position-relative">
     <div class="chat-messages p-4">
@@ -19,14 +9,15 @@
 
 <div  *ngFor="let m of mensagens">
 
+
     <!-- Verificar se a mensagem é do remetente -->
     <div class="chat-message-left pb-4" *ngIf="m.id_rementente == m.cliente_id">
       <div>
-          <img src="{{m.foto}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-          <div class="text-muted small text-nowrap mt-2">{{m.tempo_envio}}</div>
+          
+          <div class="text-muted small text-nowrap mt-2">{{m.tempo_envio | date: 'HH:mm '}}</div>
         </div>
         <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-          <div class="font-weight-bold mb-1">{{m.nome}}</div>
+          <!-- <div class="font-weight-bold mb-1">{{m.nome}}</div> -->
           {{m.texto}}
         </div>
     </div>
@@ -37,7 +28,7 @@
     <!-- Mensagem enviada pelo atendente -->
     <div class="chat-message-right pb-4"  *ngIf="m.id_rementente != m.cliente_id" >
       <div>
-        <img src="{{m.foto_atendente}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+        
         <div class="text-muted small text-nowrap mt-2">{{m.tempo_envio}}</div>
       </div>
       <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
